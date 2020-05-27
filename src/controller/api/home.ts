@@ -12,7 +12,7 @@ class HomeClass {
 export default class Home extends BaseController {
   @Get('test')
   async test () {
-    console.log(33333)
+    // console.log(this.config)
     return "aaaaa";
   }
 
