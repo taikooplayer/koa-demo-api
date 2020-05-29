@@ -12,5 +12,7 @@ app.use(KoaBodyparser());
 app.use(middleware);
 Router(app);
 
-app.listen(3000);
-console.log(`this app is at http://localhost:3000`);
+const prot = app.config.port;
+
+app.listen(prot);
+console.log(`this app is at http://localhost:${prot}`);

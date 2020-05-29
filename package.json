@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=dev ./node_modules/.bin/nodemon --watch ./src ./src/app.ts",
     "start": "tsc && NODE_ENV=prod pm2 start node dist/app.js --name=\"DemoApi\" -i 4",
-    "stop": "pm2 stop DemoApi",
-    "restart": "tsc && pm2 reload DemoApi",
-    "reload": "pm2 reload DemoApi --trace",
+    "stop": "pm2 delete DemoApi",
+    "reload": "tsc && pm2 reload DemoApi --trace",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
   },
   "author": "vince liang",

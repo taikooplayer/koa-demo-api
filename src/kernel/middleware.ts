@@ -1,7 +1,7 @@
 
 
 const middleware = async (ctx, next) => {
-  console.log(3333, ctx);
+  // console.log(3333, ctx);
   await next();
 };
 

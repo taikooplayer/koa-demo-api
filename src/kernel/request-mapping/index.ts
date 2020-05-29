@@ -8,6 +8,7 @@ import { ControllerRequestParamsInterface } from '../decorator/params.decorator'
 import { ParamtypesEnum } from '../enum/paramtypes.enum';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
+import { Application } from '..';
 // import { DataTypeEnum } from './enum/data-type.enum';
 
 // 路由正则校准
@@ -22,11 +23,13 @@ export interface RouteMetadataInterface {
 
 export class RequestMapping {
   private readonly router;
+  private readonly app;
   public _files: Set<string> = new Set();
   public _routes: Map<string, RouteMetadataInterface> = new Map();
 
-  constructor (router) {
+  constructor (router, app: Application) {
     this.router = router;
+    this.app = app;
   }
 
   remove (src: string, st: string) {
@@ -42,11 +45,11 @@ export class RequestMapping {
    * @param dir 路径
    */
   scanDir (dir: string) {
-    const appDir = this.remove(__dirname, 'src');
-    
+    const appDir = this.remove(__dirname, 'kernel');
     if (!path.isAbsolute(dir)) {
-      dir = path.join(appDir, 'src/controller', dir);
+      dir = path.join(appDir, '/controller', dir);
     }
+    
     if (!fs.existsSync(dir)) {
       throw new Error(`Can not find directory: ${dir}`);
     }
@@ -93,7 +96,7 @@ export class RequestMapping {
         this.storeRouter(file, prefix, url, handler);
         this.router[httpMethod](url, ...middleware, async (ctx: Context) => {
           const data: any[] = await this.handleRouteParams(ctx, params);
-          const instance = new controller();
+          const instance = new controller(this.app);
           const result = await instance[funcName](...data);
           if (ctx.body === undefined) {
             ctx.body = this.handleDataType(result);
