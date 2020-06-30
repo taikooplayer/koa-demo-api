@@ -1,4 +1,4 @@
-import KoaApplication = require('koa');
+import * as KoaApplication from 'koa';
 
 /****************** koa-config ******************/
 interface ConfigInterface {

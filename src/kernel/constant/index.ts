@@ -11,3 +11,7 @@ export const CONTROLLER_PRIFIX_METADATA = Symbol('Controller#Prefix');
 export const CONTROLLER_RETURN_TYPE_METADATA = Symbol('Controller#ReturnType');
 // 控制器里路由方法的请求参数
 export const CONTROLLER_REQUEST_PARAMS_METADATA = Symbol('Controller#RequestParams');
+// 注入容器
+export const INJECTABLE_METADATA = Symbol('Injectable');
+// service实例map
+export const SERVICE_METADATA = Symbol('Service');

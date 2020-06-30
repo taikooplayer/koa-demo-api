@@ -9,6 +9,7 @@ import { ParamtypesEnum } from '../enum/paramtypes.enum';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { Application } from '..';
+import { parseRequestCookies } from '../utils';
 // import { DataTypeEnum } from './enum/data-type.enum';
 
 // 路由正则校准
@@ -136,13 +137,16 @@ export class RequestMapping {
       }: ControllerRequestParamsInterface = params[i];
       let param: any;
       switch(paramtype) {
+        case ParamtypesEnum.CONTEXT:
+          param = ctx;
+          break;
         case ParamtypesEnum.QUERY: 
           param = key ? ctx.request.query[key] : ctx.request.query;
           break;
         case ParamtypesEnum.BODY:
           param = key ? ctx.request.body[key] : ctx.request.body;
           break;
-        case ParamtypesEnum.PARAM:
+        case ParamtypesEnum.PARAMS:
           param = key ? ctx.params[key]: ctx.params;
           break;
         case ParamtypesEnum.HEADERS:
@@ -154,14 +158,19 @@ export class RequestMapping {
         case ParamtypesEnum.RESPONSE:
           param = ctx.response;
           break;
+        case ParamtypesEnum.COOKIES:
+          param = key ? ctx.cookies.get(key) : ctx.cookies;
+          break;
         default:
           break;
       }
-      param = plainToClass(dataType, param);
-      if (typeof param === 'object' ) {
-        const errors = await validate(param);
-        if (errors && errors.length > 0) {
-          throw new Error();
+      if (ParamtypesEnum.PARAMS === paramtype || ParamtypesEnum.QUERY === paramtype || ParamtypesEnum.BODY === paramtype) {
+        param = plainToClass(dataType, param);
+        if (typeof param === 'object' ) {
+          const errors = await validate(param);
+          if (errors && errors.length > 0) {
+            throw new Error();
+          }
         }
       }
       data[parameterIndex] = param;

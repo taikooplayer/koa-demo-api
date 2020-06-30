@@ -27,9 +27,11 @@ const createParamDecorator = (paramtype) => {
   };
 };
 
+export const Context = createParamDecorator(ParamtypesEnum.CONTEXT);
 export const Query = createParamDecorator(ParamtypesEnum.QUERY);
 export const Body = createParamDecorator(ParamtypesEnum.BODY);
-export const Param = createParamDecorator(ParamtypesEnum.PARAM);
+export const Params = createParamDecorator(ParamtypesEnum.PARAMS);
 export const Request = createParamDecorator(ParamtypesEnum.REQUEST);
 export const Response = createParamDecorator(ParamtypesEnum.RESPONSE);
 export const Headers = createParamDecorator(ParamtypesEnum.HEADERS);
+export const Cookies = createParamDecorator(ParamtypesEnum.COOKIES);

@@ -1,9 +1,10 @@
 export const enum ParamtypesEnum {
+  CONTEXT = 'Context',
   REQUEST = 'ContextRequest',
   RESPONSE = 'ContextResponse',
   BODY = 'ContextRequestBody',
   QUERY = 'ContextRequestQuery',
-  PARAM = 'ContextRequestParam',
+  PARAMS = 'ContextRequestParam',
   HEADERS = 'ContextRequestHeaders',
-  
+  COOKIES = 'ContextRequestCookies',
 }
