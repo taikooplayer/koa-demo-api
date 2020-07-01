@@ -4,6 +4,9 @@ import { Query, Body, Params, Headers, Cookies, Context, Response } from '../../
 import { IsInt, IsNotEmpty } from 'class-validator';
 import { Autowired } from '../../kernel/decorator/autowired.decorator';
 import UserService from '../../service/user';
+import { VUser } from '../../entities/VUser';
+import NewService from '../../service/user/user';
+import { Model } from '../../kernel/model';
 
 class HomeClass {
   @IsInt()
@@ -16,8 +19,8 @@ export default class Home extends BaseController {
   @Autowired({z: 1, k: 2})
   public uSer: UserService;
 
-  @Autowired(['a',2])
-  public u1Ser: UserService;
+  @Autowired()
+  public newSer: NewService;
 
   // @Get('test/:id')
   // async test (@Query() query) {
@@ -28,9 +31,10 @@ export default class Home extends BaseController {
 
   @Get('test/:id')
   async test (@Response() res) {
+    const a = await Model.getInstance('admin').getRepository(VUser).findOne({ id: 1 });
 
-    // return {a: 123, b: 33};
-    res.redirect('/about');
+    console.log(3333, a);
+    return {a: 123, b: 33};
   }
 
   // @Post('user')

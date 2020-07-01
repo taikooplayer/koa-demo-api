@@ -1,9 +1,12 @@
-export type ConfigInterface = {
-  [key: string]: any
-}
+// export type ConfigInterface = {
+//   [key: string]: any
+// }
+
+import { CoreConfig } from '../kernel';
 
 export default () => {
-  const config: ConfigInterface = {};
+  const config: CoreConfig = {};
+  
   config.port = 3000;
   config.middleware = ['errorHandler'];
 

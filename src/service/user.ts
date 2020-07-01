@@ -3,8 +3,6 @@ import { Injectable } from '../kernel/decorator/injectable.decorator';
 import { Autowired } from '../kernel/decorator/autowired.decorator';
 import SystemService from './system';
 
-
-
 @Injectable()
 export default class UserService extends BaseService {
 

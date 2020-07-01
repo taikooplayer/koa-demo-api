@@ -1,12 +1,19 @@
-import { Application } from '.';
+import { Application, CoreConfig } from '.';
+import { Context } from 'koa';
 
+interface controllerOption {
+  app: Application,
+  ctx: Context
+};
 
 export default class BaseController {
-  public readonly app;
-  public readonly config;
+  public readonly app: Application;
+  public readonly config: CoreConfig;
+  public readonly ctx: Context;
 
-  constructor(app: Application) {
-    this.app = app;
-    this.config = app.config;
+  constructor(options: controllerOption) {
+    this.app = options.app;
+    this.config = this.app.config;
+    this.ctx = options.ctx;
   }
 }

@@ -4,7 +4,7 @@ import { Injectable } from '../../kernel/decorator/injectable.decorator';
 
 
 @Injectable()
-export default class NewService extends BaseService {
+export default class UserService extends BaseService {
   public async test() {
     return '21';
   }

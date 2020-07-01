@@ -97,7 +97,7 @@ export class RequestMapping {
         this.storeRouter(file, prefix, url, handler);
         this.router[httpMethod](url, ...middleware, async (ctx: Context) => {
           const data: any[] = await this.handleRouteParams(ctx, params);
-          const instance = new controller(this.app);
+          const instance = new controller({ app: this.app, ctx });
           const result = await instance[funcName](...data);
           if (ctx.body === undefined) {
             ctx.body = this.handleDataType(result);

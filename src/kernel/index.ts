@@ -1,12 +1,17 @@
 import * as KoaApplication from 'koa';
+import * as BaseTypeorm from 'typeorm'
+
+export interface TypeormConfig {
+  datasources: BaseTypeorm.ConnectionOptions[];
+};
 
 /****************** koa-config ******************/
-interface ConfigInterface {
-  [key: string]: any;
-  port: number;
-  middleware: [];
+export interface CoreConfig {
+  port?: number;
+  middleware?: Array<string>;
+  typeorm?: TypeormConfig;
 }
 
 export class Application extends KoaApplication {
-  config: ConfigInterface;
+  config: CoreConfig;
 }

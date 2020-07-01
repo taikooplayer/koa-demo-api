@@ -8,7 +8,8 @@
     "start": "tsc && NODE_ENV=prod pm2 start node dist/app.js --name=\"DemoApi\" -i 4",
     "stop": "pm2 delete DemoApi",
     "reload": "tsc && pm2 reload DemoApi --trace",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "db": "typeorm-model-generator -h localhost -d v_admin -u root -e mysql -o ./src"
   },
   "author": "vince liang",
   "license": "ISC",
@@ -19,7 +20,9 @@
     "class-validator": "^0.12.2",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
-    "reflect-metadata": "^0.1.13"
+    "mysql2": "^2.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/koa": "^2.11.3",
